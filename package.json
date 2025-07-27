@@ -2,25 +2,34 @@
   "name": "love-ledger",
   "version": "1.0.0",
   "description": "Welcome to the Love Ledger project! 💚",
-  "main": "index.js",
+  "main": "src/index.js",
+  "type": "module",
   "directories": {
     "doc": "docs",
     "example": "examples"
   },
   "dependencies": {
-    "@bjornkennethholmstrom/ggf-core": "^0.1.1"
+    "@bjornkennethholmstrom/ggf-core": "^0.1.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test-love-ledger.js",
+    "test:integration": "node examples/egp-integration.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GlobalGovernanceFrameworks/love-ledger.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "keywords": [
+    "love-ledger",
+    "hearts",
+    "leaves",
+    "care-economy",
+    "governance",
+    "aubi"
+  ],
+  "author": "Global Governance Frameworks",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/GlobalGovernanceFrameworks/love-ledger/issues"
   },
