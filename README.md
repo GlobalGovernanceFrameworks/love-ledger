@@ -1,6 +1,6 @@
 # Love Ledger 💚
 
-Welcome to the Love Ledger project!
+Welcome to the Love Ledger project\!
 
 ## What is Love Ledger?
 
@@ -23,9 +23,11 @@ This project implements key components from several interconnected frameworks:
 
 ## Project Status
 
-🚧 **Active Development: Building the MVP Web App** 🚧
+✅ **MVP Foundation Built, Core Logic Next** ✅
 
-The theoretical frameworks and core data schemas (`ggf-core`) are complete. Our current focus is on building the official web application as a Minimum Viable Product (MVP) to enable our first community pilot. The backend logic for the care economy engine is well-defined, and this repository contains the code for its tangible implementation.
+The foundational infrastructure for the MVP web app is complete as of Sun Jul 27 2025. This includes a full authentication system, a database backend, internationalization, and adaptive theming.
+
+The current focus is on implementing the core economic engine: the functionality for logging care acts and integrating the Hearts and Leaves calculation engine.
 
 ## The Web Application
 
@@ -33,20 +35,29 @@ This repository contains the official web application for the Love Ledger. It is
 
 ### Tech Stack
 
-  * **Framework**: SvelteKit
+  * **Framework**: SvelteKit 2.x
   * **Language**: TypeScript
-  * **Styling**: Tailwind CSS
-  * **Database ORM**: Drizzle ORM (using SQLite for local dev, PostgreSQL for production)
+  * **Styling**: Tailwind CSS v4
+  * **Database ORM**: Drizzle ORM with SQLite (local dev) and PostgreSQL (production)
+  * **Authentication**: Lucia Auth v3 with Argon2 for password hashing
+  * **Validation**: Zod for form and data validation
   * **Testing**: Vitest (Unit/Component) & Playwright (End-to-End)
-  * **Authentication**: Lucia (for MVP, with a roadmap to DID/UCAN integration)
 
-### Key MVP Features
+### Key MVP Features (Roadmap)
 
 The initial version of the web app will focus on three core user journeys:
 
 1.  **📝 Log Care Acts**: A simple, accessible form for community members to submit their contributions for validation.
 2.  **✅ Community Validation**: A secure interface for designated Community Weavers to review and validate submissions based on community-defined protocols.
 3.  **📊 User Dashboard**: A personal dashboard for users to track their 💚 **Hearts** and 🍃 **Leaves** balances and view their contribution history.
+
+### ✅ Current Implemented Features
+
+  * **Authentication System**: Complete user registration, login, and session management with protected routes.
+  * **Database & Backend**: SQLite database is set up with Drizzle ORM, including user schemas and a query abstraction layer.
+  * **Internationalization (i18n)**: A custom, route-based i18n system supporting English and Swedish is operational.
+  * **Adaptive Theming System**: Dual themes ('Living Earth' and 'Cosmic Night') with persistence and accessibility support are implemented.
+  * **UI Foundation**: The responsive SvelteKit app includes a dashboard mockup with placeholder components for Hearts/Leaves balances and care act cards.
 
 ## 🚀 Getting Started (Local Development)
 
