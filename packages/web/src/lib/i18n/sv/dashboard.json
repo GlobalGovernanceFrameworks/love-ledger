@@ -1,0 +1,41 @@
+{
+  "pageTitle": "Översikt",
+  "metaDescription": "Din Love Ledger-översikt som visar din Hearts-balans, omsorgsbidrag och gemenskapspåverkan",
+  "welcome": "Välkommen tillbaka, {name}! 💚",
+  "welcomeFallback": "Välkommen till din Love Ledger-översikt! 💚",
+  "subtitle": "Dina omsorgsbidrag väver överflöd i gemenskapen",
+  "logCareAct": "Dela omsorg",
+  "stats": {
+    "totalHearts": "Hearts totalt",
+    "totalLeaves": "Leaves totalt",
+    "thisMonth": "Denna månad",
+    "aubiBonus": "AUBI Bonus"
+  },
+  "lmci": {
+    "title": "Love, Meaning & Connection Index",
+    "subtitle": "Ditt bidrag till gemenskapens blomstrande",
+    "love": "Kärlek (Omsorg och relationer)",
+    "meaning": "Mening (Syfte och växande)",
+    "connection": "Samhörighet (Harmoni mellan människa och land)"
+  },
+  "recentCareActs": {
+    "title": "Senaste omsorgshandlingar",
+    "viewAll": "Visa alla",
+    "empty": {
+      "title": "Inga omsorgshandlingar än",
+      "description": "Påbörja din resa genom att dela ditt första omsorgsbidrag med gemenskapen"
+    }
+  },
+  "quickActions": {
+    "title": "Snabba åtgärder",
+    "validate": "Bevittna omsorg",
+    "community": "Visa cirkeln"
+  },
+  "communityImpact": {
+    "title": "Gemenskapens krusningar",
+    "heartsCirculation": "Hearts i omlopp",
+    "careHours": "Omsorgstimmar denna månad",
+    "activeMembers": "Aktiva vävare",
+    "leavesEarned": "Växande Leaves"
+  }
+}

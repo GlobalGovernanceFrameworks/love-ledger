@@ -1,0 +1,65 @@
+{
+  "page": {
+    "title": "Our Sacred Agreements",
+    "metaDescription": "Our commitment to your data sovereignty and privacy. Learn how Love Ledger is built on a foundation of trust and Right Relationship."
+  },
+  "hero": {
+    "heading": "A Covenant of Trust & Data Sovereignty",
+    "description": "This is not a typical privacy policy. It is a sacred agreement between you, your community, and the Love Ledger ecosystem. We believe your story and your contributions are yours alone, and we have built this platform to honor that sovereignty."
+  },
+  "rights": {
+    "heading": "Your Sovereign Rights Over Your Story",
+    "description": "In the Love Ledger, we don't think of it as 'user data'; we think of it as your story, your gifts, and your relationships. You have absolute rights over them.",
+    "items": [
+      {
+        "title": "The Right to Ownership",
+        "description": "Your identity and your contributions are fundamentally yours. We do not own your data. Our long-term architecture is built on Decentralized Identifiers (DIDs), meaning you control the keys to your own digital identity."
+      },
+      {
+        "title": "The Right to Control Access",
+        "description": "You decide who sees your contributions. You will have granular control to share with your community, specific circles, or keep things private. Consent is our guiding principle."
+      },
+      {
+        "title": "The Right to Portability",
+        "description": "Your record of care is a part of your story. You can download all of your contributions at any time in a simple, machine-readable format."
+      },
+      {
+        "title": "The Right to Erasure",
+        "description": "You can leave the circle at any time and request the deletion of your personal account information. We will honor your request, in line with our data retention policies."
+      }
+    ]
+  },
+  "collection": {
+    "heading": "The Information We Hold in Trust, and Why",
+    "description": "We are committed to collecting only what is necessary to nurture the care economy and make the system work.",
+    "items": [
+      {
+        "title": "Account Information",
+        "description": "When you join, we ask for your name (as you'd like to be known in the community) and email address. We need this to create your account and for you to sign in."
+      },
+      {
+        "title": "Contribution Data",
+        "description": "The details of the care acts you share—their type, duration, and description. This is the heart of the Love Ledger, allowing the community to witness and honor your gifts."
+      },
+      {
+        "title": "Interaction Data",
+        "description": "We may collect anonymous analytics to improve the application's usability. We are committed to using privacy-first analytics tools that do not track you across the web."
+      }
+    ]
+  },
+  "sharing": {
+    "heading": "How We Weave Our Stories Together",
+    "description": "Your privacy is paramount, and transparency is essential for community trust.",
+    "paragraph1": "Your validated contributions (like '2 hours of Earth Care') and your community name will be visible within your designated community to allow for the flow of Hearts and Leaves. We will never sell your personal data to third parties. Ever.",
+    "paragraph2": "Anonymized and aggregated data may be used to calculate a community's overall well-being (like the LMCI metric) and to conduct research that serves the commons, always with community consent."
+  },
+  "indigenousSovereignty": {
+    "heading": "Indigenous Data Sovereignty: A Foundational Principle",
+    "description": "We recognize that Indigenous communities have an inherent and inalienable right to govern the collection, ownership, and application of their own data. Any use of the Love Ledger within Bioregional Autonomous Zones (BAZs) or Indigenous communities will be subject to the community's own data protocols and requires their Free, Prior, and Informed Consent (FPIC 2.0)."
+  },
+  "contact": {
+    "heading": "Questions About Our Weaving?",
+    "description": "This is a living agreement, and we welcome your thoughts on how to make it stronger and clearer. Please reach out to us with any questions.",
+    "email": "contact@globalgovernanceframeworks.org"
+  }
+}

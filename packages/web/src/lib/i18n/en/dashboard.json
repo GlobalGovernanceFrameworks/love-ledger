@@ -1,0 +1,41 @@
+{
+  "pageTitle": "Dashboard",
+  "metaDescription": "Your Love Ledger dashboard showing Hearts balance, care contributions, and community impact",
+  "welcome": "Welcome back, {name}! 💚",
+  "welcomeFallback": "Welcome to your Love Ledger dashboard! 💚",
+  "subtitle": "Your care contributions are weaving abundance in the community",
+  "logCareAct": "Share Care",
+  "stats": {
+    "totalHearts": "Total Hearts",
+    "totalLeaves": "Total Leaves", 
+    "thisMonth": "This Month",
+    "aubiBonus": "AUBI Bonus"
+  },
+  "lmci": {
+    "title": "Love, Meaning & Connection Index",
+    "subtitle": "Your contribution to community flourishing",
+    "love": "Love (Care & Relationships)",
+    "meaning": "Meaning (Purpose & Growth)",
+    "connection": "Connection (Human-Land Harmony)"
+  },
+  "recentCareActs": {
+    "title": "Recent Care Acts",
+    "viewAll": "View all",
+    "empty": {
+      "title": "No care acts yet",
+      "description": "Start your journey by sharing your first care contribution with the community"
+    }
+  },
+  "quickActions": {
+    "title": "Quick Actions",
+    "validate": "Witness Care",
+    "community": "View Circle"
+  },
+  "communityImpact": {
+    "title": "Community Ripples",
+    "heartsCirculation": "Hearts flowing",
+    "careHours": "Care hours this month",
+    "activeMembers": "Active weavers",
+    "leavesEarned": "Leaves growing"
+  }
+}

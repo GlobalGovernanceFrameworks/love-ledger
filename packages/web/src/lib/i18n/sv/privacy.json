@@ -1,0 +1,65 @@
+{
+  "page": {
+    "title": "Våra heliga överenskommelser",
+    "metaDescription": "Vårt åtagande för din datasuveränitet och integritet. Lär dig hur Love Ledger bygger på en grund av tillit och Rätt Relation."
+  },
+  "hero": {
+    "heading": "Ett förbund av tillit och datasuveränitet",
+    "description": "Detta är inte en vanlig integritetspolicy. Det är en helig överenskommelse mellan dig, din gemenskap och Love Ledger-ekosystemet. Vi anser att din berättelse och dina bidrag är dina egna, och vi har byggt denna plattform för att hedra den suveräniteten."
+  },
+  "rights": {
+    "heading": "Din suveräna rätt över din berättelse",
+    "description": "I Love Ledger ser vi det inte som 'användardata'; vi ser det som din berättelse, dina gåvor och dina relationer. Du har absoluta rättigheter över dem.",
+    "items": [
+      {
+        "title": "Rätten till ägande",
+        "description": "Din identitet och dina bidrag är i grunden dina. Vi äger inte din data. Vår långsiktiga arkitektur bygger på Decentraliserade Identiteter (DIDs), vilket betyder att du kontrollerar nycklarna till din egen digitala identitet."
+      },
+      {
+        "title": "Rätten att kontrollera åtkomst",
+        "description": "Du bestämmer vem som ser dina bidrag. Du kommer att ha finkornig kontroll för att dela med din gemenskap, specifika cirklar eller hålla saker privata. Samtycke är vår vägledande princip."
+      },
+      {
+        "title": "Rätten till portabilitet",
+        "description": "Din historik av omsorg är en del av din berättelse. Du kan ladda ner alla dina bidrag när som helst i ett enkelt, maskinläsbart format."
+      },
+      {
+        "title": "Rätten till radering",
+        "description": "Du kan lämna cirkeln när som helst och begära radering av din personliga kontoinformation. Vi kommer att hörsamma din begäran, i linje med våra policyer för datalagring."
+      }
+    ]
+  },
+  "collection": {
+    "heading": "Informationen vi förvaltar med tillit, och varför",
+    "description": "Vi är fast beslutna att endast samla in det som är nödvändigt för att vårda omsorgsekonomin och få systemet att fungera.",
+    "items": [
+      {
+        "title": "Kontoinformation",
+        "description": "När du går med ber vi om ditt namn (som du vill bli kallad i gemenskapen) och din e-postadress. Vi behöver detta för att skapa ditt konto och för att du ska kunna logga in."
+      },
+      {
+        "title": "Bidragsdata",
+        "description": "Detaljerna om de omsorgshandlingar du delar—deras typ, varaktighet och beskrivning. Detta är hjärtat i Love Ledger, som låter gemenskapen bevittna och hedra dina gåvor."
+      },
+      {
+        "title": "Interaktionsdata",
+        "description": "Vi kan samla in anonym analysdata för att förbättra applikationens användbarhet. Vi är fast beslutna att använda integritetsfokuserade analysverktyg som inte spårar dig över webben."
+      }
+    ]
+  },
+  "sharing": {
+    "heading": "Hur vi väver våra berättelser samman",
+    "description": "Din integritet är av yttersta vikt, och transparens är avgörande för gemenskapens tillit.",
+    "paragraph1": "Dina validerade bidrag (som '2 timmar Jordvård') och ditt gemenskapsnamn kommer att vara synliga inom din utsedda gemenskap för att möjliggöra flödet av Hearts och Leaves. Vi kommer aldrig att sälja din personliga data till tredje part. Aldrig.",
+    "paragraph2": "Anonymiserad och aggregerad data kan användas för att beräkna en gemenskaps övergripande välbefinnande (som LMCI-måttet) och för att bedriva forskning som tjänar allmänningen, alltid med gemenskapens samtycke."
+  },
+  "indigenousSovereignty": {
+    "heading": "Ursprungsfolks datasuveränitet: En grundläggande princip",
+    "description": "Vi erkänner att ursprungsfolk har en inneboende och oförytterlig rätt att styra över insamling, ägande och tillämpning av sin egen data. All användning av Love Ledger inom Bioregional Autonomous Zones (BAZs) eller ursprungsfolksgemenskaper kommer att vara underställd gemenskapens egna dataprotokoll och kräver deras Fria, Föregående och Informerade Samtycke (FPIC 2.0)."
+  },
+  "contact": {
+    "heading": "Frågor om vår väv?",
+    "description": "Detta är en levande överenskommelse, och vi välkomnar dina tankar om hur vi kan göra den starkare och tydligare. Vänligen kontakta oss med eventuella frågor.",
+    "email": "contact@globalgovernanceframeworks.org"
+  }
+}

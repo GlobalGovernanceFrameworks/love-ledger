@@ -1,0 +1,29 @@
+{
+  "page": {
+    "title": "Connect With Us",
+    "metaDescription": "Get in touch with the Love Ledger team. We welcome questions, collaboration proposals, and stories from communities interested in weaving a regenerative future."
+  },
+  "hero": {
+    "heading": "Let's Weave Together",
+    "description": "The Love Ledger is a living, breathing ecosystem built in collaboration with communities like yours. Whether you have a question, an idea, or a story to share, we would be honored to hear from you."
+  },
+  "contactMethods": {
+    "emailTitle": "Our Primary Connection",
+    "emailDescription": "For all inquiries, including community partnerships, technical questions, or press, please reach out to our core team at the email address below.",
+    "emailAddress": "contact@globalgovernanceframeworks.org"
+  },
+  "sections": [
+    {
+      "title": "Are you a Community or BAZ?",
+      "description": "Interested in piloting the Love Ledger or learning how to form a BAZ? We would love to connect and support your journey."
+    },
+    {
+      "title": "Are you a Developer or Researcher?",
+      "description": "Want to contribute to the open-source code or collaborate on research? Connect with us via email to learn more about our technical roadmap and research needs."
+    },
+    {
+      "title": "Are you a Storyteller or Artist?",
+      "description": "We believe in the power of stories and art to shape our future. If our vision resonates with you, we would be delighted to find ways to collaborate."
+    }
+  ]
+}

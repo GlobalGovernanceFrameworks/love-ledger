@@ -1,0 +1,72 @@
+{
+  "site": {
+    "title": "Love Ledger",
+    "tagline": "Nurturing Community Through Care",
+    "description": "Share care, grow community, heal the land - together we weave a regenerative future"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "sharecare": "Share Care",
+    "witnesscare": "Witness Care",
+    "community": "Community",
+    "settings": "Settings",
+    "signout": "Sign Out"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "submit": "Submit",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "theme": {
+    "livingearth": "Living Earth",
+    "cosmicnight": "Cosmic Night",
+    "switchtocosmic": "Switch to Cosmic Night theme",
+    "switchtoearth": "Switch to Living Earth theme"
+  },
+  "hearts": {
+    "categories": {
+      "community": "Community",
+      "care": "Care & Healing",
+      "ecology": "Earth Care", 
+      "culture": "Cultural Weaving",
+      "healing": "Healing & Medicine",
+      "wisdom": "Elder Wisdom",
+      "creativity": "Creative Arts",
+      "protection": "Protection & Safety",
+      "peace": "Peace & Unity",
+      "earth": "Land & Soil",
+      "fire": "Fire & Transformation",
+      "water": "Water & Flow",
+      "air": "Wind & Movement",
+      "spirit": "Spirit & Prayer"
+    }
+  },
+  "careacts": {
+    "types": {
+      "elders": "Elder Care",
+      "childcare": "Child Care",
+      "ecological": "Earth Care",
+      "cultural": "Cultural Weaving",
+      "community": "Community Care"
+    },
+    "validation": {
+      "pending": "Awaiting Witness",
+      "validated": "Witnessed",
+      "rejected": "Needs Reflection",
+      "community_review": "Circle Review"
+    },
+    "impactripples": "Impact Ripples",
+    "abundancereceived": "Abundance Received"
+  }
+}

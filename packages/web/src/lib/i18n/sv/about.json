@@ -1,0 +1,51 @@
+{
+  "hero": {
+    "heading": "Varje omsorgshandling har ett värde",
+    "description": "Love Ledger är mer än en applikation; det är en ny berättelse om värde. Vi bygger en värld där ekonomin mäts i styrkan hos våra gemenskaper och hälsan hos vår planet."
+  },
+  "problem": {
+    "heading": "Vår berättelse om separation",
+    "paragraph1": "Våra nuvarande ekonomiska system bygger på en trasig berättelse: att värde endast kommer från det som kan utvinnas, ägas och säljas. Denna berättelse ignorerar det mest grundläggande arbetet av alla—omsorgen om våra barn, visdomen från våra äldre, hälsan i vår jord och banden i våra gemenskaper.",
+    "paragraph2": "Denna berättelse om separation har lett oss till en polykris, där vi känner oss frånkopplade från varandra och från vårt planetära hem. GGF föddes ur ett behov av att förändra denna berättelse."
+  },
+  "vision": {
+    "heading": "Att väva en ny berättelse om värde",
+    "paragraph1": "Tänk om vår ekonomi var en återspegling av vår kärlek till varandra och till världen? Tänk om varje omsorgshandling för en granne, varje timme som ägnas åt att återställa en skog, och varje tradition som förs vidare till nästa generation skapade en synlig krusning av överflöd?",
+    "paragraph2": "Love Ledger är vårt svar. Det är ett verktyg utformat för att göra det osynliga arbetet med omsorg och förvaltarskap synligt, påtagligt och värdefullt."
+  },
+  "howitworks": {
+    "heading": "Från en idé till ett ekosystem",
+    "paragraph1": "Love Ledger är hjärtat i en regenerativ ekonomisk motor. Genom appen kan gemenskapsmedlemmar logga sina bidrag, som sedan hedras av **Community Weavers** genom delade protokoll. Dessa validerade handlingar genererar **Hearts** (för omsorg) och **Leaves** (för ekologi).",
+    "paragraph2": "Dessa är inte bara poäng i en app. De är integrerade i **AUBI Framework** som bonusar, vilket skapar verklig ekonomisk trygghet. Hela detta system är utformat för att implementeras inom **Bioregional Autonomous Zones (BAZs)**, vilket säkerställer att det alltid är gemenskapsburet och vägleds av principerna i **Global Governance Frameworks (GGF)**."
+  },
+  "origin": {
+    "heading": "Möt vävaren",
+    "paragraph1": "Love Ledger och det bredare GGF-projektet började som ett soloprojekt av Björn K. Holmström i Upplands Väsby, Sverige. Det föddes inte ur en affärsplan, utan ur ett djupt rotat behov av att bygga påtagliga, öppen källkods-verktyg för att bemöta den globala polykrisen.",
+    "paragraph2": "Detta projekt är ett ödmjukt erbjudande och ett pågående passionsarbete, som väver samman trådar av teknologi, styrelseskick och uråldrig visdom i hoppet om att bidra till en regenerativ framtid."
+  },
+  "invitation": {
+    "heading": "Bli en del av väven",
+    "paragraph1": "Denna berättelse är inte menad att skrivas ensam. Love Ledger är ett öppet, samarbetande projekt för det gemensamma bästa. Oavsett om du är en utvecklare, en styrelseteoretiker, en gemenskapsorganisatör, eller helt enkelt någon som tror på en framtid rotad i omsorg, behövs ditt bidrag.",
+    "cta": "Utforska hur du kan engagera dig"
+  },
+  "principles": {
+    "title": "Våra heliga överenskommelser",
+    "description": "Grundstenarna i vår gemenskap",
+    "communityheld": {
+      "title": "Gemenskapsburen",
+      "description": "Gemenskaper bär sin egen visdom och vägleder sina egna vägar"
+    },
+    "indigenousguided": {
+      "title": "Ursprungsfolksledd",
+      "description": "Rotad i ursprungsfolkens suveränitet och traditionella visdomsbärare"
+    },
+    "carecentered": {
+      "title": "Omsorgscentrerad",
+      "description": "Värdesätter det heliga arbetet som upprätthåller familjer och gemenskaper"
+    },
+    "earthhonoring": {
+      "title": "Hedrar jorden",
+      "description": "Firar arbete som helar och skyddar vårt enda hem"
+    }
+  }
+}

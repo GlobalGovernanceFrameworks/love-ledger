@@ -1,0 +1,29 @@
+{
+  "page": {
+    "title": "Kontakta oss",
+    "metaDescription": "Ta kontakt med Love Ledger-teamet. Vi välkomnar frågor, samarbetsförslag och berättelser från gemenskaper som är intresserade av att väva en regenerativ framtid."
+  },
+  "hero": {
+    "heading": "Låt oss väva tillsammans",
+    "description": "Love Ledger är ett levande, andande ekosystem som byggs i samarbete med gemenskaper som din. Oavsett om du har en fråga, en idé eller en berättelse att dela, skulle vi bli hedrade av att höra från dig."
+  },
+  "contactMethods": {
+    "emailTitle": "Vår primära anslutning",
+    "emailDescription": "För alla förfrågningar, inklusive gemenskapspartnerskap, tekniska frågor eller press, vänligen kontakta vårt kärnteam på e-postadressen nedan.",
+    "emailAddress": "contact@globalgovernanceframeworks.org"
+  },
+  "sections": [
+    {
+      "title": "Är du en gemenskap eller BAZ?",
+      "description": "Intresserad av att köra en pilot med Love Ledger eller lära dig hur man bildar en BAZ? Vi vill gärna ansluta och stödja er resa."
+    },
+    {
+      "title": "Är du en utvecklare eller forskare?",
+      "description": "Vill du bidra till den öppna källkoden eller samarbeta kring forskning? Kontakta oss via e-post för att lära dig mer om vår tekniska färdplan och forskningsbehov."
+    },
+    {
+      "title": "Är du en berättare eller konstnär?",
+      "description": "Vi tror på kraften i berättelser och konst för att forma vår framtid. Om vår vision resonerar med dig, skulle vi bli glada att hitta sätt att samarbeta."
+    }
+  ]
+}

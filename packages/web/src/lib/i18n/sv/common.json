@@ -1,0 +1,72 @@
+{
+  "site": {
+    "title": "Love Ledger",
+    "tagline": "Vårdar gemenskapen genom omsorg",
+    "description": "Dela omsorg, odla gemenskap, hela landet - tillsammans väver vi en regenerativ framtid"
+  },
+  "navigation": {
+    "dashboard": "Översikt",
+    "sharecare": "Dela omsorg",
+    "witnesscare": "Bevittna omsorg",
+    "community": "Gemenskap",
+    "settings": "Inställningar",
+    "signout": "Logga ut"
+  },
+  "common": {
+    "loading": "Laddar...",
+    "error": "Fel",
+    "save": "Spara",
+    "cancel": "Avbryt",
+    "delete": "Ta bort",
+    "edit": "Redigera",
+    "close": "Stäng",
+    "submit": "Skicka",
+    "continue": "Fortsätt",
+    "back": "Tillbaka",
+    "next": "Nästa",
+    "previous": "Föregående",
+    "yes": "Ja",
+    "no": "Nej"
+  },
+  "theme": {
+    "livingearth": "Levande jord",
+    "cosmicnight": "Kosmisk natt",
+    "switchtocosmic": "Växla till kosmisk natt-tema",
+    "switchtoearth": "Växla till levande jord-tema"
+  },
+  "hearts": {
+    "categories": {
+      "community": "Gemenskap",
+      "care": "Omsorg och helande",
+      "ecology": "Jordvård",
+      "culture": "Kulturell vävning",
+      "healing": "Helande och medicin",
+      "wisdom": "Äldrevisdom",
+      "creativity": "Kreativa konster",
+      "protection": "Skydd och säkerhet",
+      "peace": "Fred och enhet",
+      "earth": "Mark och jord",
+      "fire": "Eld och förvandling",
+      "water": "Vatten och flöden",
+      "air": "Vind och rörelse",
+      "spirit": "Ande och bön"
+    }
+  },
+  "careacts": {
+    "types": {
+      "elders": "Äldrevård",
+      "childcare": "Barnvård",
+      "ecological": "Jordvård",
+      "cultural": "Kulturell vävning",
+      "community": "Gemenskapsomsorg"
+    },
+    "validation": {
+      "pending": "Väntar på vittne",
+      "validated": "Bevittnad",
+      "rejected": "Behöver reflektion",
+      "community_review": "Cirkelgranskning"
+    },
+    "impactripples": "Påverkanskrusningar",
+    "abundancereceived": "Överflöd mottaget"
+  }
+}

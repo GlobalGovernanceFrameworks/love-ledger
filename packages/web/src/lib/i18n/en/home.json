@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "heading": "Nurture our community, one act of care at a time",
+    "description": "Share your gifts of care for elders and children, heal the land together, and weave the threads of a regenerative community where every contribution is honored.",
+    "sharecare": "Share your care",
+    "healland": "Heal the land",
+    "weavecommunity": "Weave community",
+    "continuejourney": "Continue Your Journey"
+  },
+  "auth": {
+    "joincircle": "Join the Circle",
+    "welcomeback": "Welcome Back",
+    "login": "Sign In",
+    "register": "Create Account"
+  },
+  "howwegrow": {
+    "title": "How We Grow Together",
+    "subtitle": "Simple steps to weave care into community",
+    "description": "Every act of care strengthens the web of connection that holds us all",
+    "step1": {
+      "title": "Share Your Care",
+      "description": "Honor the time you spend caring for elders, children, and nurturing your community"
+    },
+    "step2": {
+      "title": "Community Witnessing",
+      "description": "Community Weavers honor your contributions through cultural protocols and shared wisdom"
+    },
+    "step3": {
+      "title": "Abundance Flows",
+      "description": "Hearts and Leaves flow to you, contributing to community abundance and your wellbeing"
+    }
+  },
+  "values": {
+    "title": "Our Sacred Agreements",
+    "subtitle": "Rooted in Right Relationship",
+    "description": "We honor Indigenous wisdom and walk in harmony with all our relations",
+    "communityheld": {
+      "title": "Community Held",
+      "description": "Communities hold their own wisdom and guide their own paths"
+    },
+    "indigenousguided": {
+      "title": "Indigenous Guided",
+      "description": "Rooted in Indigenous sovereignty and traditional wisdom keepers"
+    },
+    "carecentered": {
+      "title": "Care Centered",
+      "description": "Values the sacred work that sustains families and communities"
+    },
+    "earthhonoring": {
+      "title": "Earth Honoring",
+      "description": "Celebrates work that heals and protects our only home"
+    }
+  },
+  "footer": {
+    "aboutstory": "About Our Story",
+    "sacredagreements": "Sacred Agreements",
+    "connectwithus": "Connect With Us",
+    "tagline": "Love Ledger - Weaving the threads of Right Relationship"
+  }
+}

@@ -1,0 +1,696 @@
+/* src/app.css - Living Earth Theme (Light Default) + Cosmic Night Option */
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+/* Shared Color Palette - Used by Both Themes */
+:root {
+  /* Earth Base Colors */
+  --earth-primary: #2d5a3d;        /* Deep forest green */
+  --earth-secondary: #4a7c4f;      /* Sage green */
+  --earth-terracotta: #d2691e;     /* Warm clay */
+  --earth-sand: #f4e4bc;           /* Sandy beige */
+  --earth-twilight: #4a5568;       /* Twilight blue-gray */
+  --earth-cream: #fdfcf8;          /* Warm white */
+  --earth-bark: #8b4513;           /* Tree bark brown */
+  
+  /* Vibrant Accents (same for both themes) */
+  --vibrant-yellow: #fbbf24;       /* 💛 Bright sun yellow */
+  --vibrant-orange: #fb923c;       /* 🧡 Energetic orange */
+  --vibrant-red: #ef4444;          /* ❤️ Passionate red */
+  --vibrant-green: #22c55e;        /* 💚 Life green */
+  --vibrant-blue: #3b82f6;         /* 💙 Sky blue */
+  --vibrant-purple: #8b5cf6;       /* 💜 Magic purple */
+  --vibrant-cyan: #06b6d4;         /* Bright cyan */
+  
+  /* Deep Space (for cosmic theme) */
+  --deep-space: #1e1b4b;           /* Deep purple-blue */
+  --deep-space-light: #312e81;     /* Lighter deep purple */
+  
+  /* Shared Gradients */
+  --gradient-earth-vibrant: linear-gradient(135deg, var(--earth-secondary) 0%, var(--vibrant-green) 100%);
+  --gradient-sunset-energy: linear-gradient(135deg, var(--earth-terracotta) 0%, var(--vibrant-orange) 100%);
+  --gradient-hearts-rainbow: linear-gradient(45deg, 
+    var(--vibrant-red) 0%, 
+    var(--vibrant-orange) 20%, 
+    var(--vibrant-yellow) 40%, 
+    var(--vibrant-green) 60%, 
+    var(--vibrant-blue) 80%, 
+    var(--vibrant-purple) 100%);
+}
+
+/* Enhanced theme variables for better cosmic support */
+:root[data-theme="cosmic"] {
+  /* Better cosmic theme backgrounds */
+  --bg-primary: #0f0f23;           /* Deeper space */
+  --bg-secondary: #1a1a40;         /* Lighter deep space */
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.08);
+  --bg-nav: rgba(15, 15, 35, 0.95);
+  
+  --text-primary: #f8fafc;         /* Pure white text */
+  --text-secondary: #cbd5e1;       /* Light gray text */
+  --text-muted: rgba(248, 250, 252, 0.7);
+  
+  --border-subtle: rgba(248, 250, 252, 0.1);
+  --border-medium: rgba(248, 250, 252, 0.2);
+  --border-strong: rgba(248, 250, 252, 0.3);
+  
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-strong: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Enhanced living earth theme */
+:root:not([data-theme="cosmic"]) {
+  --bg-primary: #fdfcf8;           /* Warm white */
+  --bg-secondary: #f4e4bc;         /* Sandy beige */
+  --bg-card: rgba(255, 255, 255, 0.8);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --bg-nav: rgba(253, 252, 248, 0.95);
+  
+  --text-primary: #2d5a3d;         /* Deep forest green */
+  --text-secondary: #4a5568;       /* Twilight blue-gray */
+  --text-muted: rgba(74, 85, 104, 0.7);
+  
+  --border-subtle: rgba(45, 90, 61, 0.1);
+  --border-medium: rgba(45, 90, 61, 0.2);
+  --border-strong: rgba(45, 90, 61, 0.3);
+  
+  --shadow-soft: 0 4px 20px rgba(45, 90, 61, 0.1);
+  --shadow-medium: 0 8px 30px rgba(45, 90, 61, 0.15);
+  --shadow-strong: 0 12px 40px rgba(45, 90, 61, 0.2);
+}
+
+/* Typography - Same for Both Themes */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Headlines: Serif for personality */
+h1, h2, h3, .heading {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+/* Body text: Sans-serif for legibility */
+p, span, label, .body-text {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-secondary);
+}
+
+/* Adaptive Buttons */
+.btn-primary {
+  background: var(--gradient-earth-vibrant);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-medium);
+  background: var(--gradient-sunset-energy);
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  border: 2px solid var(--vibrant-green);
+  color: var(--vibrant-green);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: var(--vibrant-green);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+}
+
+/* Adaptive Cards */
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-hearts-rainbow);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+  background: var(--bg-card-hover);
+  border-color: var(--border-medium);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Enhanced Hearts Badge System with Color Categories */
+.hearts-badge {
+  background: var(--gradient-earth-vibrant);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hearts-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.hearts-badge:hover::before {
+  left: 100%;
+}
+
+.hearts-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+}
+
+/* Color-Coded Hearts System */
+.hearts-community { 
+  background: linear-gradient(135deg, #fbbf24, #f59e0b); 
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+}
+
+.hearts-care { 
+  background: linear-gradient(135deg, #ef4444, #dc2626); 
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.hearts-ecology { 
+  background: linear-gradient(135deg, #22c55e, #16a34a); 
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+.hearts-culture { 
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed); 
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.hearts-healing { 
+  background: linear-gradient(135deg, #06b6d4, #0891b2); 
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+}
+
+.hearts-wisdom { 
+  background: linear-gradient(135deg, #dc2626, #b91c1c); 
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+}
+
+.hearts-creativity { 
+  background: linear-gradient(135deg, #a855f7, #9333ea); 
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+}
+
+.hearts-protection { 
+  background: linear-gradient(135deg, #475569, #334155); 
+  box-shadow: 0 4px 15px rgba(71, 85, 105, 0.3);
+}
+
+.hearts-peace { 
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0); 
+  color: var(--earth-primary) !important;
+  box-shadow: 0 4px 15px rgba(248, 250, 252, 0.3);
+}
+
+.hearts-earth { 
+  background: linear-gradient(135deg, #92400e, #78350f); 
+  box-shadow: 0 4px 15px rgba(146, 64, 14, 0.3);
+}
+
+/* Vibrant Hearts for different categories */
+.hearts-care { background: linear-gradient(135deg, var(--vibrant-red), var(--vibrant-orange)); }
+.hearts-ecology { background: linear-gradient(135deg, var(--vibrant-green), var(--earth-secondary)); }
+.hearts-culture { background: linear-gradient(135deg, var(--vibrant-purple), var(--vibrant-blue)); }
+.hearts-community { background: linear-gradient(135deg, var(--vibrant-yellow), var(--vibrant-orange)); }
+
+/* Enhanced Leaves Badge */
+.leaves-badge {
+  background: linear-gradient(135deg, var(--vibrant-green), var(--earth-primary));
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.leaves-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.leaves-badge:hover::before {
+  left: 100%;
+}
+
+/* Logo animation enhancement */
+.heart-logo-shifting {
+  animation: color-shift 10s ease-in-out infinite;
+}
+
+@keyframes color-shift {
+  0% { filter: hue-rotate(0deg); }
+  25% { filter: hue-rotate(90deg); }
+  50% { filter: hue-rotate(180deg); }
+  75% { filter: hue-rotate(270deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Enhanced Color-Shifting Icon System */
+.color-shifting-icon {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  animation: gentle-color-shift 8s ease-in-out infinite;
+}
+
+.color-shifting-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+  z-index: 1;
+}
+
+.color-shifting-icon:hover::before {
+  left: 100%;
+}
+
+.color-shifting-icon:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1) saturate(1.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Icon inside should be above the shimmer effect */
+.color-shifting-icon :global(svg) {
+  position: relative;
+  z-index: 2;
+}
+
+/* Color-shifting animation */
+@keyframes gentle-color-shift {
+  0% { filter: hue-rotate(0deg) brightness(1); }
+  25% { filter: hue-rotate(30deg) brightness(1.05); }
+  50% { filter: hue-rotate(0deg) brightness(1); }
+  75% { filter: hue-rotate(-30deg) brightness(1.05); }
+  100% { filter: hue-rotate(0deg) brightness(1); }
+}
+
+/* Adaptive Navigation */
+.nav-bar {
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s ease;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+}
+
+.nav-link:hover {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--vibrant-green);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  background: var(--gradient-earth-vibrant);
+  color: white;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+/* Hero Section - Adaptive Backgrounds */
+.hero-section {
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Living Earth hero background - more subtle */
+:root:not([data-theme="cosmic"]) .hero-section {
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(210, 105, 30, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(74, 124, 79, 0.12) 0%, transparent 50%),
+    var(--bg-primary);
+}
+
+/* Cosmic Night hero background - more dramatic */
+:root[data-theme="cosmic"] .hero-section {
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(34, 197, 94, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(251, 191, 36, 0.08) 0%, transparent 50%),
+    var(--bg-primary);
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Living Earth texture - organic pattern */
+:root:not([data-theme="cosmic"]) .hero-section::before {
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a7c4f' fill-opacity='0.04'%3E%3Cpath d='M30 30c0-3 2.5-5.5 5.5-5.5S41 27 41 30s-2.5 5.5-5.5 5.5S30 33 30 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+}
+
+/* Cosmic Night texture - starfield */
+:root[data-theme="cosmic"] .hero-section::before {
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='40' cy='40' r='1'/%3E%3Ccircle cx='20' cy='20' r='0.5'/%3E%3Ccircle cx='60' cy='60' r='0.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+}
+
+/* Care Act Cards - Adaptive */
+.care-act-card {
+  background: var(--bg-card);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.3s ease;
+  position: relative;
+  backdrop-filter: blur(15px);
+}
+
+.care-act-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-earth-vibrant);
+  opacity: 0;
+  border-radius: 1.25rem;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.care-act-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--vibrant-green);
+}
+
+.care-act-card:hover::before {
+  opacity: 0.1;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: 2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.theme-toggle:hover {
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-soft);
+}
+
+.theme-toggle-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-icon.earth {
+  background: var(--gradient-earth-vibrant);
+}
+
+.theme-toggle-icon.cosmic {
+  background: var(--gradient-hearts-rainbow);
+}
+
+/* LMCI Progress - Adaptive */
+.lmci-progress {
+  background: var(--border-subtle);
+  border-radius: 1rem;
+  height: 0.75rem;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border-medium);
+}
+
+.lmci-progress-fill {
+  height: 100%;
+  border-radius: 1rem;
+  transition: width 0.8s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.lmci-progress-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 25%, rgba(255, 255, 255, 0.3) 25%, rgba(255, 255, 255, 0.3) 50%, transparent 50%);
+  background-size: 1rem 1rem;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.love-progress { background: linear-gradient(90deg, var(--vibrant-red), var(--vibrant-orange)); }
+.meaning-progress { background: linear-gradient(90deg, var(--vibrant-purple), var(--vibrant-blue)); }
+.connection-progress { background: linear-gradient(90deg, var(--vibrant-green), var(--earth-primary)); }
+
+/* Stats Cards - Adaptive */
+.stats-card {
+  background: var(--bg-card);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.3s ease;
+  position: relative;
+  backdrop-filter: blur(15px);
+}
+
+.stats-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-medium);
+  background: var(--bg-card-hover);
+}
+
+/* Form inputs - Adaptive */
+input, textarea, select {
+  background: var(--bg-card);
+  border: 2px solid var(--border-medium);
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--vibrant-green);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+  background: var(--bg-card-hover);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Animations - Same for Both Themes */
+@keyframes heart-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes leaf-sway {
+  0%, 100% { transform: rotate(0deg) translateY(0px); }
+  25% { transform: rotate(2deg) translateY(-2px); }
+  75% { transform: rotate(-2deg) translateY(2px); }
+}
+
+.hearts-pulse {
+  animation: heart-pulse 2s ease-in-out infinite;
+}
+
+.leaves-sway {
+  animation: leaf-sway 3s ease-in-out infinite;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .color-shifting-icon {
+    animation-duration: 6s; /* Faster on mobile */
+  }
+  
+  .hero-section {
+    padding: 1rem 0;
+  }
+  
+  .card {
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .hero-section {
+    padding: 2rem 0;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .color-shifting-icon,
+  .hero-section,
+  .card,
+  .btn-primary,
+  .btn-secondary {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .color-shifting-icon:hover {
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* Enhanced focus states for accessibility */
+.color-shifting-icon:focus,
+.btn-primary:focus,
+.btn-secondary:focus {
+  outline: 2px solid var(--vibrant-blue);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .color-shifting-icon,
+  .hero-section::before {
+    background: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+  }
+}

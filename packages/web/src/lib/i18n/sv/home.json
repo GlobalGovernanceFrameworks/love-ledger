@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "heading": "Vårda vår gemenskap, en omsorgshandling i taget",
+    "description": "Dela dina gåvor av omsorg för äldre och barn, hela landet tillsammans, och väv trådarna av en regenerativ gemenskap där varje bidrag hedras.",
+    "sharecare": "Dela din omsorg",
+    "healland": "Hela landet",
+    "weavecommunity": "Väva gemenskap",
+    "continuejourney": "Fortsätt din resa"
+  },
+  "auth": {
+    "joincircle": "Gå med i cirkeln",
+    "welcomeback": "Välkommen tillbaka",
+    "login": "Logga in",
+    "register": "Skapa konto"
+  },
+  "howwegrow": {
+    "title": "Hur vi växer tillsammans",
+    "subtitle": "Enkla steg för att väva omsorg in i gemenskapen",
+    "description": "Varje omsorgshandling stärker det nätverk av förbindelser som håller oss alla",
+    "step1": {
+      "title": "Dela din omsorg",
+      "description": "Hedra den tid du spenderar på att vårda äldre, barn och närande din gemenskap"
+    },
+    "step2": {
+      "title": "Gemenskapens bevittnande",
+      "description": "Community Weavers hedrar dina bidrag genom kulturella protokoll och delad visdom"
+    },
+    "step3": {
+      "title": "Överflöd flödar",
+      "description": "Hearts och Leaves flödar till dig, bidrar till gemenskapens överflöd och ditt välbefinnande"
+    }
+  },
+  "values": {
+    "title": "Våra heliga överenskommelser",
+    "subtitle": "Rotade i rätt relation",
+    "description": "Vi hedrar ursprungsfolkens visdom och vandrar i harmoni med alla våra relationer",
+    "communityheld": {
+      "title": "Gemenskapsburen",
+      "description": "Gemenskaper bär sin egen visdom och vägleder sina egna vägar"
+    },
+    "indigenousguided": {
+      "title": "Ursprungsfolksledd",
+      "description": "Rotad i ursprungsfolkens suveränitet och traditionella visdomsbärare"
+    },
+    "carecentered": {
+      "title": "Omsorgscentrerad",
+      "description": "Värdesätter det heliga arbetet som upprätthåller familjer och gemenskaper"
+    },
+    "earthhonoring": {
+      "title": "Hedrar jorden",
+      "description": "Firar arbete som helar och skyddar vårt enda hem"
+    }
+  },
+  "footer": {
+    "aboutstory": "Om vår berättelse",
+    "sacredagreements": "Heliga överenskommelser",
+    "connectwithus": "Kontakta oss",
+    "tagline": "Love Ledger - Väver trådarna av rätt relation"
+  }
+}
