@@ -74,7 +74,20 @@ This system addresses **root causes of systemic fragility** identified in regene
 3. **identity_zome**: Web of Trust, Community Weaver certification, vouching
 4. **leaves_zome**: Ecological NFT minting, Green Job Score, monitoring logs
 
-**See**: [TECHNICAL_SPECIFICATION.md](docs/TECHNICAL_SPECIFICATION.md) for complete implementation details.
+### Strategic Positioning vs. CBDCs
+
+With the Digital Euro launching 2027-2029, Hearts occupies the **sanctuary currency** niche:
+
+**Hearts' Key Advantages**:
+- **True offline capability**: Local mesh network IS the ledger (not delayed sync to central authority)
+- **No holding limits**: Demurrage handles circulation naturally (vs. Digital Euro's €3,000 cap protecting banks)
+- **Privacy by architecture**: 5 visibility layers built into code (vs. policy-based promises)
+- **Community governance**: BAZ councils set rules (vs. ECB bureaucrats)
+- **Complementary, not competitive**: Use Digital Euro for taxes/global trade, Hearts for care economy
+
+**Timeline Pressure**: Hearts must be operational in Stockholm by 2027 to be the **incumbent alternative** when Digital Euro launches, not the challenger.
+
+**See**: [Section 1.3 of Technical Specification](docs/TECHNICAL_SPECIFICATION.md#13-strategic-positioning-hearts-vs-cbdcs) for detailed comparison.
 
 ---
 
