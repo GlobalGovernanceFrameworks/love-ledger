@@ -1,5 +1,5 @@
 # Love Ledger & Hearts Protocol MVP
-## Technical Specification v1.1
+## Technical Specification v1.2
 
 **Status**: Draft for Implementation  
 **Last Updated**: 2025-12-21  
@@ -7,6 +7,7 @@
 **Target Pilot**: Stockholm Archipelago BAZ (Regionens Nervsystem)
 
 **Version History**:
+- **v1.2 (2025-12-21)**: Added Section 2.5 "Fiat Currency Interface" with manual gateway approach for MVP. BankID + Swish for AUBI distribution (automated); Provider redemption via email-based governance (manual). Updated deployment architecture and roadmap to reflect 2-week fiat integration timeline vs. 6-week automated treasury.
 - **v1.1 (2025-12-21)**: Added Section 1.3 "Strategic Positioning: Hearts vs. CBDCs" responding to Digital Euro 2029 rollout timeline. Emphasizes sovereign offline capability as primary competitive advantage.
 - **v1.0 (2025-12-21)**: Initial technical specification from AI Council consensus.
 
@@ -107,8 +108,9 @@ graph TB
 | **Session/Queue** | Redis 7 | Fast session management, async job processing |
 | **Blockchain Core** | Holochain 0.3.x | Agent-centric, offline-first, data sovereignty |
 | **Smart Contracts** | Rust (Holochain DNAs) | Memory safety, performance, WebAssembly target |
-| **Federation** | Node.js Gateway | Traditional banking API bridge |
-| **Auth** | Lucia v3 | Current implementation, DID integration path |
+| **AUBI Distribution** | Swish Corporate API | Automated monthly fiat payments to users |
+| **Provider Redemption** | Manual Process (MVP) | Email-based governance approval; automated in Phase 2 |
+| **Auth** | Lucia v3 + BankID | Current implementation + Swedish national identity |
 
 **Migration Path**:
 - **Phase 1 (MVP)**: PostgreSQL primary, Holochain read-only audit log (daily sync)
@@ -520,6 +522,437 @@ async fn issue_layer2_bonus(
     Ok(base_value)
 }
 ```
+
+### 2.5 Fiat Currency Interface (The Gateway)
+
+**Strategic Decision**: Manual redemption process for MVP to avoid regulatory capture and encourage circulation discipline.
+
+#### 2.5.1 Design Philosophy: Closed-Loop MVP
+
+**The Regulatory Trap**:
+Building automated Hearts↔SEK conversion in MVP would likely trigger EU e-money regulations:
+- Classification as "Virtual Currency Exchange" or "E-Money Institution"
+- Mandatory KYC/AML compliance infrastructure
+- Banking license requirements
+- Compliance costs that would kill pilot before launch
+
+**The Circulation Goal**:
+If users can easily "cash out" Hearts to SEK, they treat Hearts as vouchers for real money:
+- Earn Hearts → immediately convert → never circulate
+- Defeats the entire purpose of building local care economy loops
+- Prevents community from discovering Hearts' value for direct exchange
+
+**The Manual Solution**:
+By keeping Hearts intentionally closed-loop (earnable and spendable, but not self-service convertible), we:
+- Argue it's a "Community Reward System" (like airline miles) not a regulated currency
+- Force users to think: "I have Hearts, who can I hire?" not "How do I cash out?"
+- Buy time to negotiate regulatory sandbox with Finansinspektionen
+- Learn what automated treasury should do by watching manual process
+
+#### 2.5.2 AUBI Fiat Distribution (Automated)
+
+**Why This Must Be Automated**: Users need baseline survival income (8,400 SEK/month). This is non-negotiable and must be reliable.
+
+**Swedish Banking Stack**:
+- **BankID**: National identity + authentication (links user to bank account)
+- **Swish Corporate**: Mobile payment system (deposits to user accounts)
+- **SEB**: Treasury bank account for BAZ reserves
+
+**Implementation Flow**:
+
+```typescript
+// Monthly AUBI distribution (runs 1st of month)
+async function distributeMonthlyAUBI() {
+  // 1. Get all verified users
+  const users = await db.users.findMany({
+    where: { 
+      bankIdVerified: true,
+      aubiEligible: true,
+      enrolledDate: { lte: new Date() } // Enrolled before this month
+    }
+  });
+  
+  // 2. Calculate prorated amounts for mid-month enrollees
+  const payments = users.map(user => {
+    const daysInMonth = getDaysInMonth();
+    const daysEnrolled = user.enrolledThisMonth() 
+      ? daysInMonth - user.enrolledDate.getDate() + 1
+      : daysInMonth;
+    
+    const proratedAmount = Math.floor(
+      8400 * (daysEnrolled / daysInMonth)
+    );
+    
+    return {
+      userId: user.id,
+      amount: proratedAmount,
+      bankAccount: user.bankAccount,
+      reference: `AUBI-${user.id}-${currentMonth()}`
+    };
+  });
+  
+  // 3. Create Swish batch payment (max 500/batch)
+  const batches = chunk(payments, 500);
+  
+  for (const batch of batches) {
+    const swishPayload = batch.map(p => ({
+      payeeAlias: p.bankAccount, // User's phone number or account
+      amount: p.amount,
+      currency: "SEK",
+      message: "Love Ledger AUBI - " + currentMonthName(),
+      payerPaymentReference: p.reference,
+      callbackUrl: `${API_URL}/webhooks/swish/aubi`
+    }));
+    
+    // Send to Swish Corporate API
+    await swish.createPaymentBatch({
+      payerAlias: TREASURY_SWISH_NUMBER,
+      payments: swishPayload
+    });
+  }
+  
+  // 4. Log treasury outflow
+  const totalFiat = payments.reduce((sum, p) => sum + p.amount, 0);
+  await db.treasuryTransactions.create({
+    data: {
+      type: 'AUBI_DISTRIBUTION',
+      amountSEK: totalFiat,
+      recipientCount: users.length,
+      timestamp: new Date()
+    }
+  });
+  
+  // 5. Issue Hearts (via Holochain)
+  for (const user of users) {
+    await issueMonthlyHeartsBaseline(user.holochainPubKey, 360);
+  }
+  
+  // 6. Send confirmation emails
+  await sendAUBIConfirmationEmails(users, payments);
+}
+```
+
+**Webhook Handler** (Swish callback for payment status):
+
+```typescript
+export async function POST({ request }) {
+  const payload = await request.json();
+  
+  // Swish sends: { paymentReference, status, errorCode?, amount, ... }
+  
+  if (payload.status === 'PAID') {
+    await db.aubiPayments.update({
+      where: { reference: payload.paymentReference },
+      data: { 
+        status: 'COMPLETED',
+        paidAt: new Date()
+      }
+    });
+  } else if (payload.status === 'ERROR') {
+    // Log for manual review
+    await db.aubiPayments.update({
+      where: { reference: payload.paymentReference },
+      data: { 
+        status: 'FAILED',
+        errorCode: payload.errorCode,
+        errorMessage: payload.errorMessage
+      }
+    });
+    
+    // Alert treasury admin
+    await notifyTreasuryAdmin({
+      type: 'AUBI_PAYMENT_FAILED',
+      reference: payload.paymentReference,
+      error: payload.errorMessage
+    });
+  }
+  
+  return json({ received: true });
+}
+```
+
+**BankID Authentication** (user onboarding):
+
+```typescript
+// User registration flow
+export async function POST({ request, locals }) {
+  const { personalNumber } = await request.json();
+  
+  // 1. Initiate BankID authentication
+  const authResponse = await bankid.authenticate({
+    endUserIp: request.headers.get('x-forwarded-for'),
+    personalNumber,
+    requirement: {
+      allowFingerprint: true,
+      certificatePolicies: ['1.2.752.78.1.5'] // Swedish BankID
+    }
+  });
+  
+  // 2. Poll for completion (QR code on phone, etc.)
+  const maxAttempts = 30; // 30 seconds timeout
+  let completedAuth;
+  
+  for (let i = 0; i < maxAttempts; i++) {
+    const collectResponse = await bankid.collect(authResponse.orderRef);
+    
+    if (collectResponse.status === 'complete') {
+      completedAuth = collectResponse;
+      break;
+    } else if (collectResponse.status === 'failed') {
+      throw error(400, 'BankID authentication failed');
+    }
+    
+    await sleep(1000); // Wait 1 second between polls
+  }
+  
+  if (!completedAuth) {
+    throw error(408, 'BankID authentication timeout');
+  }
+  
+  // 3. Extract verified data
+  const userData = {
+    personalNumber: completedAuth.completionData.user.personalNumber,
+    name: completedAuth.completionData.user.name,
+    bankAccount: completedAuth.completionData.user.bankAccount, // If available
+    bankIdVerified: true,
+    verifiedAt: new Date()
+  };
+  
+  // 4. Create or update user
+  await db.users.upsert({
+    where: { personalNumber: userData.personalNumber },
+    create: {
+      ...userData,
+      holochainPubKey: await generateHolochainKeypair(),
+      aubiEligible: true,
+      enrolledDate: new Date()
+    },
+    update: userData
+  });
+  
+  return json({ success: true, user: userData });
+}
+```
+
+**Effort Estimate**: 2 weeks
+- Week 1: BankID integration + testing
+- Week 2: Swish Corporate API + webhook handling + email notifications
+
+#### 2.5.3 Community Provider Redemption (Manual Process)
+
+**Why Manual for MVP**:
+- Avoids e-money regulation trigger
+- Provides governance oversight (prevents fraud)
+- Forces circulation (redemption has 48hr friction)
+- Costs zero engineering time
+- Teaches us what to automate in Phase 2
+
+**The Process** (documented, not coded):
+
+**Step 1: Provider Accumulates Hearts**
+- Community members spend AUBI Hearts at chartered Community Provider
+- Provider's Hearts balance grows in Holochain wallet
+- Example: Childcare co-op earns 10,000 Hearts over 4 weeks
+
+**Step 2: Provider Requests Redemption**
+- Provider emails BAZ governance: redemption@stockholmbaz.se
+- Email includes:
+  - Provider organization name + charter ID
+  - Hearts amount to redeem (e.g., 10,000)
+  - Reason (e.g., "Need SEK to pay rent and supplier invoices")
+  - Bank account for Swish deposit
+  - Screenshot of Holochain wallet balance
+
+**Step 3: Community Weaver Validation**
+- Community Weaver (or governance admin) reviews request
+- Checks:
+  - Is this a legitimately chartered Provider?
+  - Does Holochain balance match claimed amount?
+  - Is redemption request reasonable? (Not trying to drain treasury)
+  - Any fraud red flags? (Sudden massive Hearts accumulation)
+- Decision: Approve, Deny, or Request More Info
+- Response time: 24-48 hours
+
+**Step 4: Treasury Admin Executes**
+- If approved, treasury admin:
+  1. Logs into Swish Corporate portal
+  2. Initiates payment: Amount SEK to Provider's account
+  3. Logs transaction in Treasury spreadsheet
+  4. Burns Hearts in Holochain (marks as redeemed)
+  5. Sends confirmation email to Provider
+
+**Step 5: Accounting & Monitoring**
+- All redemptions logged in shared spreadsheet (Google Sheets)
+- Columns: Date, Provider, Hearts Burned, SEK Paid, Approver, Notes
+- Monthly summary shared with BAZ community
+- Reserve ratio recalculated weekly
+
+**Governance Limits** (Policy, Not Code):
+- Maximum 20,000 SEK per Provider per month
+- Providers encouraged to spend Hearts locally before redeeming
+- Redemptions >10,000 SEK require two Weaver signatures
+- Treasury admin can pause redemptions if reserves drop below 30%
+
+**Example Email Template**:
+
+```
+To: redemption@stockholmbaz.se
+Subject: Hearts Redemption Request - [Provider Name]
+
+Provider: Skärgård Childcare Cooperative
+Charter ID: PROV-2026-003
+Hearts to Redeem: 10,000
+SEK Needed: 10,000 (assuming 1:1 peg)
+
+Reason: Monthly rent payment (6,000 SEK) + art supplies invoice (4,000 SEK)
+
+Bank Account: +46 70 123 4567 (Swish)
+
+Holochain Wallet Balance Screenshot: [attached]
+
+Thank you,
+Anna Svensson
+Cooperative Manager
+```
+
+**Approval Response**:
+
+```
+Hi Anna,
+
+Your redemption request has been approved.
+
+Amount: 10,000 Hearts → 10,000 SEK
+Swish Payment: Initiated to +46 70 123 4567
+Expected arrival: Within 24 hours
+
+Your Hearts have been marked as burned in the system.
+Updated balance: 1,250 Hearts remaining
+
+Treasury Note: Current reserve ratio 87% (healthy)
+
+Best regards,
+Erik - Treasury Admin
+Stockholm BAZ Governance
+```
+
+**Effort Estimate**: 0 weeks coding, 4 hours documentation
+- Write Provider redemption guide
+- Create email templates
+- Design governance review checklist
+- Add to Community Provider onboarding packet
+
+#### 2.5.4 Exchange Rate: Soft Peg (Reference Only)
+
+**MVP Approach**: 1 Heart ≈ 1 SEK (indicative, not guaranteed)
+
+**Why "Soft Peg" Not Hard Peg**:
+- Hard peg (guaranteed 1:1) = regulated currency exchange
+- Soft peg (reference price) = community reward system
+
+**UI Display**:
+```
+Your Hearts Balance: 1,250 💚
+(Approximately 1,250 SEK reference value)
+
+Note: Hearts are for spending with Community Providers.
+Redemption to SEK is manual and subject to governance approval.
+```
+
+**Phase 2 Evolution**:
+- Dynamic pricing based on supply/demand
+- Automated market maker with bounds (0.8-1.2 SEK)
+- Real-time treasury reserves influence rate
+- But for MVP: Fixed reference, manual governance
+
+#### 2.5.5 Treasury Management (Manual for MVP)
+
+**The Hearts Treasury** = Dedicated SEB bank account managed by BAZ governance
+
+**Initial Capitalization**: 500,000 SEK
+- Covers: 50 users × 360 Hearts × 1 SEK × 6 months = 108,000 SEK
+- Plus: Community Provider redemptions (estimated 20,000 SEK/month) = 120,000 SEK
+- Buffer: 272,000 SEK for contingencies
+- Total: 500,000 SEK provides 100% reserve ratio at launch
+
+**Funding Sources** (To Be Determined):
+- Grant funding (Vinnova, EU Innovation Fund)
+- Stockholm municipality pilot allocation
+- Community investment (local credit union)
+- Bridge loan (repaid from future revenue)
+
+**Manual Tracking** (Google Sheets):
+
+| Date | Type | SEK In | SEK Out | Hearts Burned | Reserve Ratio |
+|------|------|--------|---------|---------------|---------------|
+| 2026-01-01 | Initial | 500,000 | - | - | 100% |
+| 2026-01-15 | AUBI | - | 420,000 | - | 88% |
+| 2026-01-28 | Redemption | - | 5,000 | 5,000 | 87% |
+| 2026-02-01 | AUBI | - | 420,000 | - | 76% |
+
+**Weekly Admin Tasks**:
+1. Check SEB account balance (login to web portal)
+2. Update Treasury spreadsheet
+3. Calculate reserve ratio: `SEK Balance / Total Hearts in Circulation`
+4. Alert governance if ratio <40%
+5. Publish transparency report to community
+
+**Effort Estimate**: 0 weeks coding, 1 day setup
+- Open SEB Treasury account
+- Create tracking spreadsheet template
+- Write treasury admin guide
+- Define governance alert thresholds
+
+#### 2.5.6 Security & Compliance
+
+**KYC/AML for AUBI Distribution**:
+- BankID provides strong identity verification (government-issued)
+- All AUBI payments logged with personal number + bank account
+- Monthly reports generated for Swedish Finansinspektionen
+- Transactions >10,000 SEK flagged for review (per EU AML directive)
+
+**Data Protection (GDPR)**:
+- Bank account numbers encrypted at rest (AES-256)
+- Encrypted in transit (TLS 1.3)
+- Access logged (audit trail)
+- User right to erasure (can delete account)
+- Not shared with third parties
+
+**Fraud Prevention**:
+- BankID = strong auth (biometrics + PIN)
+- Community Weaver validates Provider legitimacy before redemption
+- Manual review of all redemptions >10,000 SEK
+- Velocity limits (20,000 SEK/month per Provider)
+- IP address logging + anomaly detection
+
+**Legal Consultation** (Budget Item):
+- Hire Swedish fintech lawyer (50,000 SEK)
+- Review regulatory compliance strategy
+- Draft Provider redemption terms of service
+- Advise on e-money regulations vs. reward systems
+- Prepare for Finansinspektionen sandbox application (Phase 2)
+
+#### 2.5.7 Migration Path to Automated Treasury (Phase 2)
+
+**When to Automate** (Year 2):
+- MVP demonstrates demand (>100 Providers requesting redemption)
+- Regulatory sandbox negotiated with Finansinspektionen
+- Manual process becomes bottleneck (>20 redemptions/week)
+- Reserve ratio stable and predictable
+
+**What to Build Then**:
+- Self-service Provider redemption portal
+- Automated compliance checks (KYC/AML)
+- Smart contract escrow for redemptions
+- Real-time exchange rate mechanisms
+- Multi-signature treasury governance
+- Integration with multiple banks for resilience
+
+**Why Not Now**:
+- Regulatory risk too high
+- Learning what to automate from manual process
+- Engineering resources better spent on Hearts circulation
+- Manual process sufficient for 50-user pilot
 
 ---
 
@@ -2173,17 +2606,28 @@ services:
       - holochain_data:/holochain/data
       - ./holochain/dnas:/holochain/dnas
 
-  # Federation gateway (hearts treasury bridge)
+  # Federation gateway (AUBI distribution + manual redemption)
+  # NOTE: For MVP, this handles AUBI fiat payments only
+  # Provider redemptions are manual (see Section 2.5.3)
   gateway:
     build: ./gateway
     ports:
       - "3000:3000"
     environment:
-      - BANK_API_URL=${BANK_API_URL}
-      - BANK_API_KEY=${BANK_API_KEY}
+      - SWISH_API_URL=${SWISH_API_URL}
+      - SWISH_API_KEY=${SWISH_API_KEY}
+      - SWISH_MERCHANT_NUMBER=${SWISH_MERCHANT_NUMBER}
+      - BANKID_API_URL=${BANKID_API_URL}
       - HOLOCHAIN_URL=ws://holochain:8888
     depends_on:
       - holochain
+    # Handles:
+    # - BankID authentication for user onboarding
+    # - Swish Corporate API for monthly AUBI fiat distribution
+    # - Webhook endpoints for payment confirmations
+    # Does NOT handle (manual for MVP):
+    # - Provider Hearts→SEK redemption (email-based governance)
+    # - Automated treasury management (spreadsheet + manual Swish)
 
 volumes:
   postgres_data:
@@ -2191,6 +2635,64 @@ volumes:
   holochain_data:
   node_modules:
 ```
+
+**Gateway Service: Manual Mode for MVP**
+
+**Strategic Rationale**: 
+To avoid triggering EU e-money regulations and encourage Hearts circulation, the Hearts↔SEK bridge is intentionally manual in MVP:
+
+**What's Automated**:
+- ✅ AUBI fiat distribution (8,400 SEK/month via Swish Corporate API)
+- ✅ BankID authentication (links user identity to bank account)
+- ✅ Hearts issuance (360 Hearts/month via Holochain)
+- ✅ Payment webhooks (Swish confirmation callbacks)
+
+**What's Manual**:
+- ❌ Community Provider redemption (email-based governance approval)
+- ❌ Hearts→SEK exchange (no self-service conversion for users)
+- ❌ Treasury reserve management (spreadsheet + weekly manual entry)
+- ❌ Exchange rate adjustments (fixed 1 Heart ≈ 1 SEK for pilot)
+
+**The Manual Redemption Flow**:
+
+```
+Provider accumulates Hearts from community spending
+         ↓
+Emails redemption@stockholmbaz.se with request
+         ↓
+Community Weaver validates (24-48 hours)
+   • Is Provider legitimately chartered?
+   • Does Holochain balance match claim?
+   • Is amount reasonable (<20K SEK/month)?
+   • Any fraud red flags?
+         ↓
+If approved → Treasury admin initiates Swish payment
+         ↓
+Hearts marked as burned in Holochain
+         ↓
+Provider receives SEK within 48 hours
+         ↓
+Transaction logged in Treasury spreadsheet
+```
+
+**Why This Works for 50-User Pilot**:
+- Estimated 5-10 Provider redemptions per month
+- Each takes ~30 minutes to process
+- Total manual effort: ~5 hours/month
+- Much cheaper than building regulated exchange infrastructure
+- Teaches us what to automate in Phase 2
+
+**Transition to Automation** (Year 2):
+Once we have:
+- Regulatory sandbox negotiated with Finansinspektionen
+- 100+ Providers making redemption bottleneck (>20/week)
+- Stable reserve ratios and predictable demand patterns
+
+Then we build:
+- Self-service Provider redemption portal
+- Automated KYC/AML compliance checks
+- Smart contract escrow
+- Real-time exchange rate mechanisms
 
 ### 7.2 Scaling Path (Multiple BAZs)
 
@@ -2248,12 +2750,17 @@ Year 3 (Federation):
 - [ ] Build multi-tier validation logic
 - [ ] Implement Gratitude Token system
 
-**Sprint 9-12: Hearts Display**
-- [ ] Implement AUBI daily drip backend
+**Sprint 9-12: Hearts Display + AUBI Fiat**
+- [ ] Implement AUBI daily drip backend (Hearts issuance)
 - [ ] Build Hearts balance UI
 - [ ] Create demurrage calculation engine
 - [ ] Design "monthly projection" display
 - [ ] Build LMCI basic dashboard
+- [ ] **Integrate BankID authentication** (user onboarding)
+- [ ] **Integrate Swish Corporate API** (monthly fiat distribution)
+- [ ] **Build webhook handlers** (payment confirmation callbacks)
+- [ ] **Create Treasury tracking spreadsheet** (manual reserve management)
+- [ ] **Write Provider redemption guide** (manual process documentation)
 
 ### 8.2 Phase 2: Polish & Pilot (Months 7-12)
 
@@ -2278,12 +2785,22 @@ Year 3 (Federation):
 
 ### 8.3 Phase 3: Advanced Features (Year 2)
 
-- [ ] Hearts spending at Community Providers
-- [ ] Hearts Treasury fiat redemption
+**Economic Loop Completion**:
+- [ ] Hearts spending at Community Providers (marketplace)
+- [ ] **Automated Provider redemption portal** (self-service Hearts→SEK)
+- [ ] **Smart contract treasury** (replace manual spreadsheet)
+- [ ] **Dynamic exchange rate mechanisms** (supply/demand pricing)
+- [ ] **Regulatory sandbox negotiation** (Finansinspektionen)
+
+**Ecological Integration**:
 - [ ] Leaves NFT minting (simplified)
-- [ ] IoT integration for objective validation
+- [ ] IoT integration for objective validation (sensors for ecological monitoring)
+- [ ] Green Job Score calculation engine
+
+**Federation & Scale**:
 - [ ] Cross-BAZ federation (experimental)
 - [ ] Native mobile app (iOS/Android)
+- [ ] Multi-BAZ Hearts translation layer
 
 ---
 
